@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Dread-Your-Head App</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Dread-Your-head app shows you how it would look like, if you would have dreads.">
+    <meta name="developper" content="Mike Barmettler">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon"/>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/media.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/jquery.ui.rotatable.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+    <script src="js/jquery-1.12.4.js"></script>
+    <script src="js/jquery-ui.js"></script>
+    <script src="js/jquery.ui.rotatable.js"></script>
+    <script src="js/jquery.ui.touch-punch.js"></script>
+    <script src="js/bootstrap.js"></script>
+    <!-- <script src="js/html2canvas.js"></script>
+    <script src="js/canvas2image.js"></script> -->
+    <script src="js/dom-to-image.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-crescents.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-donuts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-handles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-hearts.min.js"></script>
+</head>
+
+<body>
+<div class="wrapper">
+    <div id="step-one" class="step-one">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logotype.png" alt="" class="logotype">
+            </div>
+            <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+            <p class="subtitle">How do you look with dreadlocks?</p>
+            <ul class="progress">
+                <li class="current"><span>Upload portrait</span></li>
+                <li><span>Choose dreads</span></li>
+                <li><span>Export</span></li>
+            </ul>
+            <div class="upload">
+                <img src="img/cloud.png" alt="" class="cloud">
+                <h2 class="section-title">Upload your Portrait</h2>
+                <p class="section-subtitle">Upload a nice selfie of you or your friend.<span class="spacer"></span><br />It works best when you look directly into the camera.</p>
+                <input type="file" class="inputfile" id="myPortraitSelector"/>
+                <label for="myPortraitSelector" class="upload-button">
+                    Upload
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-two" class="step-two">
+        <div class="container">
+            <div class="step-two-state">
+                <div class="logo">
+                    <img src="img/logotype.png" alt="" class="logotype">
+                </div>
+                <ul class="progress">
+                    <li class="current"><span class="vertical">Upload portrait</span></li>
+                    <li class="current"><span class="vertical">Choose dreads</span></li>
+                    <li><span class="vertical">Export</span></li>
+                </ul>
+                <div class="upload">
+                    <input type="file" class="inputfile" id="myPortraitSelector"/>
+                    <label for="myPortraitSelector" class="upload-button again">
+                        Upload again
+                    </label>
+                    <div id="btnExport" class="genBtn upload-button export">Export</div>
+                </div>
+                <div class="hidden active">
+                    <div class="line"></div>
+                    <div class="element"></div>
+                </div>
+            </div>
+            <div id="picture" class="step-two-portrait">
+                <div class="controls">
+                    <div class="move">
+                        <button class="btn-circle-left btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+                        <button class="btn-circle-right btn-circle"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                        <button class="btn-circle-up btn-circle"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+                        <button class="btn-circle-down btn-circle"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="zoom">
+                        <button id="zoomminus" class="btn-circle zoomminus"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+                        <button id="zoomplus" class="btn-circle zoomplus"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <div class="final-logo">
+                    <img src="img/logotype.png" alt="">
+                </div>
+                <div class="final-sign">
+                    <p class="sign-title">Dread-Your-Head!</p>
+                    <p class="sign-subtitle">dreadlocks-artesanal.ch</p>
+                    <div class="sign-rectangle"></div>
+                </div>
+                <div class="mobile-buttons">
+                    <input type="file" class="inputfile" id="myPortraitSelector"/>
+                    <label for="myPortraitSelector" class="upload-button again mobile"></label>
+                    <div id="mbtnExport" class="genBtn upload-button export mobile"></div>
+                </div>
+                <div id="croppingArea" class="row croppingArea"></div>
+            </div>
+            <div class="catalog">
+                <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+                <p class="subtitle">How do you look with dreadlocks?</p>
+                <div class="dreadlocks-noscroll">
+                    <div id="dreadSelectionList" class="dreadlocks"></div>
+                </div>
+                <p class="contact">Want real dreadlocks? <a href="https://dreadlocks-artesanal.ch/contact/" class="us" target="_blank">Contact us</a></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="step-three" class="step-three">
+        <div class="container">
+            <div class="step-three-state">
+                <div class="logo">
+                    <img src="img/logotype.png" alt="" class="logotype">
+                </div>
+                <ul class="progress">
+                    <li class="current"><span class="vertical">Upload portrait</span></li>
+                    <li class="current"><span class="vertical">Choose dreads</span></li>
+                    <li class="current"><span class="vertical">Export</span></li>
+                </ul>
+                <div class="upload">
+                    <div class="upload-button">
+                        <input type="file" class="inputfile" id="myPortraitSelector"/>
+                        <label for="myPortraitSelector">
+                            Upload again
+                        </label>
+                    </div>
+                    <div id="goto-direct-download" class="upload-button direct"><i class="fas fa-download"></i> Direct Download</div>
+                    <!-- <div id="goto-email-send" class="upload-button mail"><i class="far fa-envelope"></i> Download Via Email</div> -->
+                </div>
+                <div class="hidden active">
+                    <div class="line"></div>
+                    <div class="element"></div>
+                </div>
+            </div>
+            <div class="final">
+                <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+                <p class="subtitle">How do you look with dreadlocks?</p>
+                <img id="final-img" src="" alt="" class="final-img">
+            </div>
+            <div class="upload mobile">
+                <div id="goto-direct-download" class="upload-button direct"><i class="fas fa-download"></i> Direct Download</div>
+                <!-- <div id="goto-email-send" class="upload-button mail"><i class="far fa-envelope"></i> Download Via Email</div> -->
+            </div>
+        </div>
+    </div>
+
+    <div id="direct-download" class="direct-download">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logotype.png" alt="" class="logotype">
+            </div>
+            <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+            <p class="subtitle">How do you look with dreadlocks?</p>
+            <ul class="progress">
+                <li class="current"><span>Upload portrait</span></li>
+                <li class="current"><span>Choose dreads</span></li>
+                <li class="current"><span>Export</span></li>
+            </ul>
+            <div class="download">
+                <i class="fas fa-download"></i>
+                <p class="section-title">You have <span class="green">succesfully</span> downloaded<br />your dread-head image!</p>
+                <p class="section-title-mobile">Download <span class="green">succesful!</span></p>
+                <p class="section-subtitle">Do you want real Dreadlocks? <a href="https://dreadlocks-artesanal.ch/contact/" class="get-real">Get real Dreadlocks here</a></p>
+                <input type="file" class="inputfile" id="myPortraitSelector"/>
+                <label for="myPortraitSelector" class="upload-button">
+                    Create another
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div id="email-send" class="email-send">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logotype.png" alt="" class="logotype">
+            </div>
+            <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+            <p class="subtitle">How do you look with dreadlocks?</p>
+            <ul class="progress">
+                <li class="current"><span>Upload portrait</span></li>
+                <li class="current"><span>Choose dreads</span></li>
+                <li class="current"><span>Export</span></li>
+            </ul>
+            <div class="download">
+                <i class="far fa-envelope"></i>
+                <p class="section-title">Send the picture to yourself and/or a friend!</p>
+                <form action="" class="send">
+                    <div class="string">
+                        <input type="email" name="your-email" id="your-email" class="email your-email" placeholder="Your Email">
+                        <span class="grey">and/or</span>
+                        <input type="email" name="friend-email" id="friend-email" class="email friend-email" placeholder="Friend`s Email">
+                    </div>
+                    <label>
+                        <input type="checkbox" name="contact-me" id="contact-me" class="checkbox contact-me">
+                        <span class="checkbox-custom"></span>
+                        <span class="checkbox-label">Contact me for real dreads</span>
+                    </label>
+                </form>
+                <div class="nav-controls">
+                    <div id="goto-step-three" class="upload-button again back">Go Back</div>
+                    <div id="goto-email-download" class="upload-button">Send</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="email-download" class="email-download">
+        <div class="container">
+            <div class="logo">
+                <img src="img/logotype.png" alt="" class="logotype">
+            </div>
+            <h1 class="title">Dread-Your-Head in 3 Steps!</h1>
+            <p class="subtitle">How do you look with dreadlocks?</p>
+            <ul class="progress">
+                <li class="current"><span>Upload portrait</span></li>
+                <li class="current"><span>Choose dreads</span></li>
+                <li class="current"><span>Export</span></li>
+            </ul>
+            <div class="download">
+                <i class="far fa-envelope"></i>
+                <p class="section-title">You have <span class="green">succesfully</span> sent your dread-head image to your email!</p>
+                <p class="section-title-mobile">Image sent <span class="green">succesfully!</span></p>
+                <p class="section-subtitle">Do you want real Dreadlocks? <a href="https://dreadlocks-artesanal.ch/contact/" class="get-real">Get real Dreadlocks here</a></p>
+                <div class="nav-controls">
+                    <div id="goto-step-three" class="upload-button again back">Go Back</div>
+                    <div id="goto-direct-download" class="upload-button">Download it</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,574 @@
+@media all and (max-width: 1024px) {
+
+  .step-two .logo, .step-three .logo {
+    display: none;
+  }
+
+  .step-two-state, .step-three-state {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .step-two .progress, .step-three .progress {
+    counter-reset: step;
+    max-width: 800px;
+    margin: 0 auto 30px auto;
+    text-align: center;
+    width: 100%;
+  }
+
+  .step-two .progress li, .step-three .progress li {
+    list-style: none;
+    display: inline-block;
+    width: 30.33%;
+    position: relative;
+    text-align: center;
+    cursor: default;
+    color: #bdbdbd;
+    font-size: 0.75rem;
+    vertical-align: top;
+    padding: 0;
+  }
+
+  .step-two .progress li:before, .step-three .progress li:before {
+    content: counter(step);
+    counter-increment: step;
+    width: 31px;
+    height: 31px;
+    line-height : 31px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    display: block;
+    text-align: center;
+    margin: 0 auto 10px auto;
+    background-color: #fff;
+    font-size: 1rem;
+  }
+
+  .step-two .progress li:after, .step-three .progress li:after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background-color: #ddd;
+    top: 16px;
+    left: -50%;
+    z-index : -1;
+  }
+
+  .step-two .progress li:first-child:after, .step-three .progress li:first-child:after {
+    content: none;
+  }
+
+  .step-two .progress .vertical, .step-three .progress .vertical {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: inline;
+    vertical-align: bottom;
+    height: 32px;
+  }
+
+  .step-two .progress li.current, .step-three .progress li.current {
+    color: #0AC289;
+    font-weight: 700;
+  }
+
+  .step-two .progress li.current:before, .step-three .progress li.current:before {
+    border-color: #0AC289;
+    border-width: 2px;
+  }
+
+  .step-two .progress li.current:after, .step-three .progress li.current:after {
+    background-color: #0AC289;
+    height: 2px;
+    width: 100%;
+    top: 16px;
+    left: -50%;
+  }
+
+  .step-three .container {
+    flex-direction: column;
+  }
+
+  .step-three-state .upload {
+    display: none;
+  }
+
+}
+
+@media all and (max-width: 800px) {
+
+  .email-send .send {
+    text-align: center;
+  }
+
+  .email-send .send .string {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .upload-width {
+    width: 100%;
+  }
+
+  .catalog .dreadlocks-noscroll {
+    /* width: 295px;
+    overflow-x: hidden; */
+  }
+
+  .catalog .dreadlocks {
+    height: 95px;
+    width: 290px;
+  }
+
+  .catalog .dreadlocks .thumbnail {
+    height: 85px;
+    width: 85px;
+  }
+
+  .catalog .dreadlocks .thumbnail img {
+    max-height: 80px;
+    max-width: 80px;
+  }
+
+  .title {
+    font-size: 1.25rem;
+    margin-bottom: 18px;
+    text-align: center;
+  }
+
+  .subtitle {
+    font-size: 1.0625rem;
+    margin-bottom: 18px;
+  }
+
+  .section-title {
+    font-size: 1.375rem;
+  }
+
+  .section-subtitle {
+    font-size: 1.0625rem;
+  }
+
+  .email-download .far, .email-send .far  {
+    margin-top: 0;
+    margin-bottom: 20px;
+    display: inline-block;
+    font-size: 3rem;
+  }
+
+  .email-send .nav-controls, .email-download .nav-controls {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .nav-controls .upload-button.back {
+    position: relative;
+    border: none;
+    padding: 0;
+    width: auto;
+    border-bottom: 1px solid #0AC289;
+    padding-left: 20px;
+  }
+
+  .nav-controls .upload-button.back:hover {
+    background-color: transparent;
+    color: #0AC289;
+    border-bottom: 1px dashed #0AC289;
+  }
+
+  .nav-controls .upload-button.back:before {
+    display: block;
+    content: '<';
+    position: absolute;
+    transform: scaleX(0.65) scaleY(1.25);
+    top: 0;
+    left: 0;
+  }
+
+  .catalog {
+    margin-left: 10px;
+  }
+
+  /* .catalog .dreadlocks::-webkit-scrollbar { width: 0; }
+  .catalog .dreadlocks { -ms-overflow-style: none; }
+  .catalog .dreadlocks { overflow: -moz-scrollbars-none; } */
+
+
+  ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color:#6dc0c8;
+  }
+
+  ::-webkit-scrollbar-button {
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:5px;
+    height:0px
+    }
+
+    ::-webkit-scrollbar-track {
+    background-color:#ecedee
+    }
+
+    ::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    background-color: rgba(10, 194, 137, 0.5);
+    }
+
+    ::-webkit-scrollbar-thumb:hover{
+    background-color:#0AC289;
+    }
+
+    ::-webkit-resizer{
+    background-image:url('');
+    background-repeat:no-repeat;
+    width:4px;
+    height:0px
+    }
+
+    ::-webkit-scrollbar{
+    width: 4px;
+    }
+
+  .step-two-state {
+    width: 100%;
+  }
+
+  .step-two .final-logo {
+    height: auto;
+    top: 10px;
+    left: 10px;
+  }
+
+  .step-two .final-logo img {
+    width: 120px;
+  }
+
+  .step-two .sign-title {
+    font-size: 1.25rem;
+    padding-left: 5px;
+  }
+
+  .step-two .sign-subtitle {
+    font-size: 1rem;
+    padding-left: 20px;
+  }
+
+  .step-two .sign-rectangle {
+    width: 300px;
+    height: 80px;
+  }
+
+  .step-two-portrait, .step-three .final {
+    max-height: 600px;
+    width: auto;
+  }
+
+  .step-three .final-img {
+    height: auto;
+    width: auto;
+  }
+
+  .step-three .upload {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .step-three .upload-button, .upload-button {
+    width: 100%;
+    max-width: 350px;
+    margin-bottom: 15px;
+  }
+
+  .final {
+    flex-direction: column;
+  }
+
+  .step-three .final-img {
+    width: 100%;
+  }
+
+}
+
+@media all and (max-width: 640px) {
+
+  .logo {
+    text-align: center;
+    margin-bottom: 18px;
+  }
+
+  .logo img {
+    width: 100px;
+    height: auto;
+  }
+
+  .container > .logo {
+    position: static;
+  }
+
+  .title, .section-title {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  .subtitle, .section-subtitle {
+    font-size: 0.75rem;
+    margin-bottom: 16px;
+  }
+
+  .step-one .title {
+    padding: 0;
+  }
+
+  .step-one .progress {
+    margin-bottom: 20px;
+  }
+
+  .step-one .upload {
+    padding: 10px 15px;
+    margin: 0 auto;
+  }
+
+  .progress li {
+    font-size: 0.75rem;
+  }
+
+  .step-two .progress .vertical, .step-three .progress .vertical {
+    display: none;
+  }
+
+  .step-two .hidden, .step-three .hidden {
+    display: block;
+  }
+
+  .step-two, .step-three {
+    margin-top: -64px;
+  }
+
+  .step-three {
+    margin-bottom: 0;
+  }
+
+  .upload {
+    padding: 0;
+  }
+
+  .step-three .upload {
+    display: none;
+  }
+
+  .upload.mobile {
+    display: block;
+  }
+
+  .cloud {
+    margin-bottom: 10px;
+  }
+
+  .spacer {
+    display: block;
+  }
+
+  .step-two .upload {
+    display: none;
+  }
+
+  .step-two .progress {
+    margin: 0;
+  }
+
+  .step-two-state {
+    margin: 0;
+  }
+
+  .step-two-portrait, .step-three .final {
+    max-height: 440px;
+    margin-bottom: 10px;
+  }
+
+  .step-three .final-img {
+    width: auto;
+    max-width: 100%;
+    max-height: 360px;
+}
+
+  .step-three .upload.mobile {
+    margin: 20px auto 0 auto;
+    display: block;
+  }
+
+  .controls {
+    display: flex;
+    bottom: 5px;
+    right: 5px;
+    top: inherit;
+  }
+
+  .move {
+    margin-right: 30px;
+    margin-bottom: 0;
+  }
+
+  .zoom {
+    width: 60px;
+    height: auto;
+  }
+
+  .mobile-buttons {
+    display: block;
+  }
+
+  .catalog .title, .catalog .subtitle {
+    display: none;
+  }
+
+  .catalog .dreadlocks .thumbnail.active:after {
+    height: 90px;
+    width: 90px;
+    font-size: 3.5rem;
+  }
+
+  .final-sign {
+    padding: 0 0 10px 110px;
+  }
+
+  .step-two .sign-title {
+    font-size: 0.9rem;
+  }
+
+  .step-two .sign-subtitle {
+    font-size: 0.75rem;
+  }
+
+  .step-two .sign-rectangle {
+    height: 60px;
+    width: 270px;
+  }
+
+  .final {
+    flex-direction: column;
+  }
+
+  .step-three .progress {
+    margin-bottom: 0;
+  }
+
+  .step-three .title, .step-three .subtitle, .step-three .progress span{
+    display: none;
+  }
+
+  .step-three .upload {
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .step-three .upload-button, .upload-button {
+    max-width: 246px;
+    margin-bottom: 10px;
+    padding: 0 15px;
+  }
+
+  .direct-download .title, .direct-download .subtitle, .direct-download .progress {
+    display: none;
+  }
+
+  .direct-download .fas {
+    margin-bottom: 20px;
+    font-size: 3rem;
+  }
+
+  .direct-download .section-title {
+    display: none;
+  }
+
+  .direct-download .section-title-mobile, .email-download .section-title-mobile {
+    display: inline-block;
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+  }
+
+  .direct-download .section-title-mobile .green, .email-download .section-title-mobile .green {
+    color: #0AC289;
+  }
+
+  .direct-download .section-subtitle, .email-download .section-subtitle {
+    font-size: 1rem;
+    max-width: 260px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 2;
+  }
+
+  .direct-download .fas {
+    display: block;
+  }
+
+  .email-send .send {
+    text-align: left;
+  }
+
+  .email-send .title, .email-send .subtitle, .email-send .progress {
+    display: none;
+  }
+
+  .email-send .section-title {
+    font-size: 1.125rem;
+    margin-bottom: 20px;
+  }
+
+  .email-send .send {
+    margin-bottom: 20px;
+    max-width: 270px;
+  }
+
+  .email-send .send .email {
+    padding: 10px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .email-send .send .line {
+    margin-bottom: 26px;
+  }
+
+  .email-send .send .grey {
+    font-size: 0.875rem;
+    margin: 7px 0;
+  }
+
+  .email-download .title, .email-download .section-title, .email-download .subtitle, .email-download .progress {
+    display: none;
+  }
+
+  .email-download .far, .email-send .far {
+    display: block;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .direct-download .fas {
+    margin-top: 0;
+  }
+
+  .email-send .send {
+    padding: 0;
+  }
+
+  .email-send .send .string {
+    margin-bottom: 14px;
+  }
+
+}
+
+@media all and (max-width: 480px) {
+
+  .step-two-portrait {
+    width: auto;
+  }
+
+}
