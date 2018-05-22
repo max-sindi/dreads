@@ -259,7 +259,7 @@ $(function () {
                   var prevDiff = -1;
                   // this var controls how quickly image will change its sizes
                   // by pinch/unpinch
-                  var resizingSpeed = 2.5;
+                  var resizingSpeed = 2;
 
                   init();
 
