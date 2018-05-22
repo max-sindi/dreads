@@ -52,10 +52,10 @@ function hiddenStateChange(e) {
 }
 
 //specify Dread Hair images on web folder /img/dreads/
-var dreadSelectionArray = ["Dreads (1).png", "Dreads (2).png", "Dreads (3).png", "Dreads (4).png", "Dreads (5).png", "Dreads (6).png", "Dreads (7).png", "Dreads (8).png", "Dreads (9).png", "Dreads (10).png", "Dreads (11).png", "Dreads (12).png", "Dreads (13).png", "Dreads (14).png", "Dreads (15).png", "Dreads (16).png", "Dreads (17).png"];
+var dreadSelectionArray = ["Dreads(1).png", "Dreads(2).png", "Dreads(3).png", "Dreads(4).png", "Dreads(5).png", "Dreads(6).png", "Dreads(7).png", "Dreads(8).png", "Dreads(9).png", "Dreads(10).png", "Dreads(11).png", "Dreads(12).png", "Dreads(13).png", "Dreads(14).png", "Dreads(15).png", "Dreads(16).png", "Dreads(17).png", "Dreads(18).png", "Dreads(19).png", "Dreads(20).png", "Dreads(21).png", "Dreads(22).png", "Dreads(23).png"];
 //Path on FTP to the orginal Dreard photos
-var ftpPathToOrginalDreads = "img/dreads/";
-var ftpPathToThumbDreads = "img/dreads/";
+var ftpPathToOrginalDreads = "img/dreads/large/";
+var ftpPathToThumbDreads = "img/dreads/thumbs/";
 
 //global variables for image editing/sizing/transform
 var orginalPortraitWidth = 0;
@@ -84,7 +84,6 @@ $(function () {
 
     //User portrait image changed / selected
     $("input:file").change(function () {
-        // $('p#errors').html('');
         $('#userPortrait').remove();
         // Let's store the FileList Array into a variable:
         // https://developer.mozilla.org/en-US/docs/Web/API/FileList
@@ -257,105 +256,6 @@ $(function () {
                 //enable functional buttons
                 $('.btn').removeClass("disabled");
                 // Global vars to cache event state
-
-                allowFaceResizing();
-
-                function allowFaceResizing() {
-                  var evCache = new Array();
-                  var prevDiff = -1;
-                  // this var controls how quickly image will change its sizes
-                  // by pinch/unpinch
-                  var resizingSpeed = 2;
-
-                  init();
-
-                  function init() {
-                   // Install event handlers for the pointer target
-                   var el = document.getElementById("userDreads");
-                   el.onpointerdown = pointerdown_handler;
-                   el.onpointermove = pointermove_handler;
-
-                   // Use same handler for pointer{up,cancel,out,leave} events since
-                   // the semantics for these events - in this app - are the same.
-                   el.onpointerup = pointerup_handler;
-                   el.onpointercancel = pointerup_handler;
-                   el.onpointerout = pointerup_handler;
-                   el.onpointerleave = pointerup_handler;
-                  }
-
-                  function pointerdown_handler(ev) {
-                   // The pointerdown event signals the start of a touch interaction.
-                   // This event is cached to support 2-finger gestures
-                   evCache.push(ev);
-                  }
-
-
-                  function pointermove_handler(ev) {
-                   // This function implements a 2-pointer horizontal pinch/zoom gesture.
-
-                   // Find this event in the cache and update its record with this event
-                   for (var i = 0; i < evCache.length; i++) {
-                     if (ev.pointerId == evCache[i].pointerId) {
-                        evCache[i] = ev;
-                     break;
-                     }
-                   }
-
-                  // Param vector means in which way resize dread,
-                  // -1 if deacrease or +1 if increase
-                  function resizingDread(vector) {
-                     var img = $('#userDreads');
-                     var imgWrap = img.closest('.ui-wrapper');
-
-                     var width = imgWrap.width();
-                     var height = imgWrap.height();
-
-                     img.width(width + (resizingSpeed * vector));
-                     img.height(height + (resizingSpeed * vector));
-                     imgWrap.width(width + (resizingSpeed * vector));
-                     imgWrap.height(height + (resizingSpeed * vector));
-                   }
-
-                   // If two pointers are down, check for pinch gestures
-                   if (evCache.length == 2) {
-                     // Calculate the distance between the two pointers
-                     var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
-
-                     if (prevDiff > 0) {
-                       if (curDiff > prevDiff) {
-                         // The distance between the two pointers has increased
-                           resizingDread(+1);
-                       }
-                       if (curDiff < prevDiff) {
-                         // The distance between the two pointers has decreased
-                           resizingDread(-1);
-                       }
-                     }
-
-                     // Cache the distance for the next move event
-                     prevDiff = curDiff;
-                   }
-                  }
-
-                  function pointerup_handler(ev) {
-                    // Remove this pointer from the cache and reset the target's
-                    // background and border
-                    remove_event(ev);
-
-                    // If the number of pointers down is less than two then reset diff tracker
-                    if (evCache.length < 2) prevDiff = -1;
-                  }
-
-                  function remove_event(ev) {
-                   // Remove this event from the target's cache
-                   for (var i = 0; i < evCache.length; i++) {
-                     if (evCache[i].pointerId == ev.pointerId) {
-                       evCache.splice(i, 1);
-                       break;
-                     }
-                   }
-                  }
-                }
             });
             $("#loading").remove();
         }
@@ -373,7 +273,7 @@ function readImage(file) {
 
     //check image exif metadate (mobile photos)
     //affects initial rotation
-    preRotateImage(file);
+    // preRotateImage(file);
 
     // Once a file is successfully readed:
     reader.addEventListener("load", function () {
@@ -388,9 +288,10 @@ function readImage(file) {
         image.setAttribute("crossOrigin", 'anonymous');
 */
         portrait.addEventListener("load", function () {
-
+            var image = $(this);
+            var area = $("#croppingArea");
             //remove old images
-            $("#croppingArea").empty();
+            area.empty();
 
             //exif metadata rotation applying
             switch (portraitexiforientation) {
@@ -423,20 +324,31 @@ function readImage(file) {
                     break;
             }
 
-            $(this).prop("id", "userPortrait");
+            image.prop("id", "userPortrait");
 
-            $(".croppingArea").empty();
+            area.empty();
 
             // Finally append our created image
-            $("#croppingArea").append(this);
-            resetMetrics(this);
+            area.append(this);
+            resetMetrics();
+            checkImageWidth();
 
-            function resetMetrics(target) {
-              $(target).css({
+            function resetMetrics() {
+              image.css({
                 top: '',
                 left: '',
                 width: '',
               });
+            }
+
+            // if image is wider than canvas, its width will be equal canvas width
+            function checkImageWidth() {
+              var imageWidth = image.width();
+              var areaWidth = area.width();
+
+              if(imageWidth > areaWidth) {
+                image.width(areaWidth);
+              }
             }
 
             //activate zoom buttons
