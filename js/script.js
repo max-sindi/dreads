@@ -56,6 +56,7 @@ var dreadSelectionArray = ["Dreads(1).png", "Dreads(2).png", "Dreads(3).png", "D
 //Path on FTP to the orginal Dreard photos
 var ftpPathToOrginalDreads = "img/dreads/large/";
 var ftpPathToThumbDreads = "img/dreads/thumbs/";
+var ftpPathToLogo = "img/dreads/";
 
 //global variables for image editing/sizing/transform
 var orginalPortraitWidth = 0;
@@ -67,7 +68,7 @@ var currentPortraitScale = 1.0;
 //logo image for photo
 var image = new Image(80, 80);
 image.setAttribute("crossOrigin", 'anonymous');
-image.src = ftpPathToThumbDreads + 'logo.png';
+image.src = ftpPathToLogo + 'logo.png';
 
 //photo
 var portrait = new Image();
