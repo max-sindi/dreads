@@ -52,7 +52,7 @@ function hiddenStateChange(e) {
 }
 
 //specify Dread Hair images on web folder /img/dreads/
-var dreadSelectionArray = ["Dreads(1).png", "Dreads(2).png", "Dreads(3).png", "Dreads(4).png", "Dreads(5).png", "Dreads(6).png", "Dreads(7).png", "Dreads(8).png", "Dreads(9).png", "Dreads(10).png", "Dreads(11).png", "Dreads(12).png", "Dreads(13).png", "Dreads(14).png", "Dreads(15).png", "Dreads(16).png", "Dreads(17).png", "Dreads(18).png", "Dreads(19).png", "Dreads(20).png", "Dreads(21).png", "Dreads(22).png", "Dreads(23).png"];
+var dreadSelectionArray = ["Dreads(1).png", "Dreads(2).png", "Dreads(3).png", "Dreads(4).png", "Dreads(5).png", "Dreads(6).png", "Dreads(7).png", "Dreads(8).png", "Dreads(9).png", "Dreads(10).png", "Dreads(11).png", "Dreads(12).png", "Dreads(13).png", "Dreads(14).png", "Dreads(15).png", "Dreads(16).png", "Dreads(17).png", "Dreads(18).png", "Dreads(19).png", "Dreads(20).png", "Dreads(21).png", "Dreads(22).png", "Dreads(23).png", "Dreads(20).png"];
 //Path on FTP to the orginal Dreard photos
 var ftpPathToOrginalDreads = "img/dreads/large/";
 var ftpPathToThumbDreads = "img/dreads/thumbs/";
