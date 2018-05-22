@@ -948,3 +948,9 @@ body {
 .email-download .section-subtitle .get-real:hover {
   border-style: dashed;
 }
+
+.picture__errors {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+}

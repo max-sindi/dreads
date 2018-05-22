@@ -84,7 +84,7 @@ $(function () {
 
     //User portrait image changed / selected
     $("input:file").change(function () {
-      // debugger
+        // $('p#errors').html('');
         $('#userPortrait').remove();
         // Let's store the FileList Array into a variable:
         // https://developer.mozilla.org/en-US/docs/Web/API/FileList
@@ -126,7 +126,7 @@ $(function () {
 
         // Notify the user for any errors (i.e: try uploading a .txt file)
         if (errors) {
-            $('p#errors').html('<p id="errorText" style="color: #d9534f;font-size: 1.8rem">'+errors+'<p/>');
+            $('p#errors').html('<p id="errorText" style="color: #d9534f;font-size: 1.2rem">'+errors+'<p/>');
         }
         else{
             $('#errorText').remove();
@@ -163,7 +163,13 @@ $(function () {
 
     $(".btn-circle-up").on("click", function () {
         var offsets = document.getElementById('croppingArea').getBoundingClientRect();
-        var userPortrait = document.getElementById('userPortrait').getBoundingClientRect();
+        var portrait = document.getElementById('userPortrait');
+
+        if(!portrait) {
+          return;
+        }
+
+        var userPortrait = portrait.getBoundingClientRect();
         var top = offsets.top;
         var top1 = userPortrait.top;
         if (top1 - top > 10) {
