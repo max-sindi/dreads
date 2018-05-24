@@ -1,0 +1,119 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>DreadHead App</title>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Dread-ur-head app shows you how it would look like, if you would have dreads.">	
+	<meta name="developper" content="Mike Barmettler">
+	
+
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon" /> 
+
+	<!-- bootstrap, jquery, jquery ui -->
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="//code.jquery.com/jquery-1.12.4.js"></script>	
+	<script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<!-- jquery ui touch punch -->
+	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+
+	<!-- rotation resources -->
+	<link rel="stylesheet" href="//cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.css">
+	<script src="//cdn.jsdelivr.net/gh/godswearhats/jquery-ui-rotatable@1.1/jquery.ui.rotatable.min.js"></script>
+		
+	<!--jwatermark-->
+	<!-- <script src="libs/baivong-watermark-2dd6d88/dist/jquery.watermark.min.js"></script> -->
+	
+	<!-- jcanvas -->
+	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-crescents.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-donuts.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-handles.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jcanvas/20.1.4/min/jcanvas-hearts.min.js"></script>
+
+	<!-- <script src="libs/html2canvas.min.js"></script> -->
+
+	<!--bs slider-->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css"  type="text/css"> -->
+	
+	<!--app style-->
+	<link rel="stylesheet" href="Assets/css/site.css" type="text/css">	
+
+	<!-- site scripts -->
+	<script src="Assets/js/site.js"></script>
+
+</head>
+
+<body>	
+    <div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">	
+				<a href="https://dreadlocks-artesanal.ch/" target="_blank">
+					<img src="Assets/img/corp/logo_beta.png" class="img-responsive" style="width: 250px;"/>
+				</a>
+			</div>
+		</div>
+		<div class="row">
+            <div class="col-md-8">
+                <div class="jumbotron">
+					<div class="row">
+						<div class="col-lg-5 col-md-5 col-xs-5">				
+							<h3><span class="label label-outline-default">1</span> 
+							choose your portrait
+							</h3>
+							<input type="file" class="inputfile" id="myPortraitSelector"/>
+							<label for="myPortraitSelector" class="btn btn-danger uploadButton"><i class="fa fa-upload" aria-hidden="true"></i>
+								select
+							</label>
+						</div>
+						<div class="col-lg-7 col-md-4">
+							<div class="portraitZoomer">
+								<p>adjust your portrait</p>
+								<div class="row">
+									<div class="col-lg-2 col-md-2 col-xs-2">
+										<button id="zoomplus" class="btn btn-default btn-circle"><i class="fa fa-search-plus" aria-hidden="true"></i></button>
+										<button id="zoomminus" class="btn btn-default btn-circle"><i class="fa fa-search-minus" aria-hidden="true"></i></button>
+									</div>
+									<div class="col-lg-8 col-md-7 col-xs-8">
+										<button class="btn btn-default btn-circle-left btn-circle"><i class="fa fa-arrow-left" aria-hidden="true"></i></button>
+										<button class="btn btn-default btn-circle-right btn-circle"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+										<button class="btn btn-default btn-circle-up btn-circle"><i class="fa fa-arrow-up" aria-hidden="true"></i></button>
+										<button class="btn btn-default btn-circle-down btn-circle"><i class="fa fa-arrow-down" aria-hidden="true"></i></button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div id="croppingArea" class="row croppingArea">
+						
+					</div>					
+
+					<h3><span class="label label-outline-default">3</span> generate </h3>					
+					<button class="btn btn-success disabled" id="genBtn" data-loading-text="<i class='fa fa-circle-o-notch fa-spin'></i> generating...">
+						<i class="fa fa-check" aria-hidden="true"></i> 
+						generate
+					</button>
+				</div>
+				
+				<!--just for DEV testcases-->
+				<canvas id="canvas" width="450px" height="600px" style="display:none;border:1px dotted red" />
+			</div>
+
+			<div class="col-md-4"  style="padding-left: 0PX !important;">
+				<h3 style="margin-top:0px;"><span class="label label-outline-default">2</span> choos your dreads</h3>										
+				
+				<div id="dreadSelectionList" class="row" />
+            </div>   			
+		</div>		
+	</div>
+  <!-- end of container -->
+
+</body>
+</html>

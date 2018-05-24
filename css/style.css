@@ -469,11 +469,12 @@ body {
   left: 50%;
 }
 
-.zoom {
+.zoom, .rotate {
+  position: relative;
   display: block;
   height: 80px;
-  width: 100px;
-  position: relative;
+  width: 80px;
+  margin: 0 auto 20px;
 }
 
 .zoom .zoomminus {
@@ -953,4 +954,20 @@ body {
   position: absolute;
   top: 5px;
   left: 5px;
+}
+
+/* rotate buttons */
+.btn-circle-rotate {
+  position: absolute;
+  left: 50%;
+  margin-left: -17px;
+}
+
+.btn-circle-rotate-left {
+  top: 0;
+}
+
+.btn-circle-rotate-right {
+  top: auto;
+  bottom: 0;
 }

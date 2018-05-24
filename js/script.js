@@ -64,6 +64,31 @@ var scaleddownMaxPortraitwidth = 0;
 var portraitexiforientation = -1;
 var portraitRotationDegree = 0;
 var currentPortraitScale = 1.0;
+var currentRotate = 0;
+var transform = detectTransformProp();
+
+
+function detectTransformProp() {
+  var testElement = $('body');
+  var transformProp;
+  var transformProps = ["transform", "-webkit-transform", "-moz-transform", "-ms-transform", "-o-transform"];
+
+  for(var i = 0; i < transformProps.length; i++) {
+    var tr = transformProps[i];
+
+    if( testElement.css(tr) ) {
+      transformProp = tr;
+      break;
+    }
+  }
+
+  if(!transformProp) {
+    console.error('The property "transform" is not supported in this browser');
+    transformProp = 'transform';
+  }
+
+  return transformProp;
+}
 
 //logo image for photo
 var image = new Image(80, 80);
@@ -193,6 +218,25 @@ $(function () {
         n.css('left', (parseFloat(n.css('left')) + 10) + 'px');
     });
 
+    $("#btn-circle-rotate-right").on("click", rotateFaceRight);
+    $("#btn-circle-rotate-left").on("click", rotateFaceLeft);
+
+    function rotateFaceRight() {
+      rotateFace(+90);
+    }
+
+    function rotateFaceLeft() {
+      rotateFace(-90);
+    }
+
+    function rotateFace(deg) {
+      var target = $("#userPortrait");
+      var rotateDeg = currentRotate + deg;
+
+      target.css(transform, 'rotate(' + rotateDeg + 'deg)');
+      currentRotate = rotateDeg;
+    };
+
     // //selecting dreads and add to cropping area
     $(".thumbnail").on("click", function (e) {
         e.preventDefault();
@@ -256,7 +300,106 @@ $(function () {
 
                 //enable functional buttons
                 $('.btn').removeClass("disabled");
-                // Global vars to cache event state
+
+                // innit multitouch
+                allowFaceResizing();
+
+                function allowFaceResizing() {
+                  var evCache = new Array();
+                  var prevDiff = -1;
+                  // this var controls how quickly image will change its sizes
+                  // by pinch/unpinch
+                  var resizingSpeed = 2;
+
+                  init();
+
+                  function init() {
+                   // Install event handlers for the pointer target
+                   var el = document.getElementById("userDreads");
+                   el.onpointerdown = pointerdown_handler;
+                   el.onpointermove = pointermove_handler;
+
+                   // Use same handler for pointer{up,cancel,out,leave} events since
+                   // the semantics for these events - in this app - are the same.
+                   el.onpointerup = pointerup_handler;
+                   el.onpointercancel = pointerup_handler;
+                   el.onpointerout = pointerup_handler;
+                   el.onpointerleave = pointerup_handler;
+                  }
+
+                  function pointerdown_handler(ev) {
+                   // The pointerdown event signals the start of a touch interaction.
+                   // This event is cached to support 2-finger gestures
+                   evCache.push(ev);
+                  }
+
+
+                  function pointermove_handler(ev) {
+                   // This function implements a 2-pointer horizontal pinch/zoom gesture.
+
+                   // Find this event in the cache and update its record with this event
+                   for (var i = 0; i < evCache.length; i++) {
+                     if (ev.pointerId == evCache[i].pointerId) {
+                        evCache[i] = ev;
+                     break;
+                     }
+                   }
+
+                  // Param vector means in which way resize dread,
+                  // -1 if deacrease or +1 if increase
+                  function resizingDread(vector) {
+                     var img = $('#userDreads');
+                     var imgWrap = img.closest('.ui-wrapper');
+
+                     var width = imgWrap.width();
+                     var height = imgWrap.height();
+
+                     img.width(width + (resizingSpeed * vector));
+                     img.height(height + (resizingSpeed * vector));
+                     imgWrap.width(width + (resizingSpeed * vector));
+                     imgWrap.height(height + (resizingSpeed * vector));
+                   }
+
+                   // If two pointers are down, check for pinch gestures
+                   if (evCache.length == 2) {
+                     // Calculate the distance between the two pointers
+                     var curDiff = Math.abs(evCache[0].clientX - evCache[1].clientX);
+
+                     if (prevDiff > 0) {
+                       if (curDiff > prevDiff) {
+                         // The distance between the two pointers has increased
+                           resizingDread(+1);
+                       }
+                       if (curDiff < prevDiff) {
+                         // The distance between the two pointers has decreased
+                           resizingDread(-1);
+                       }
+                     }
+
+                     // Cache the distance for the next move event
+                     prevDiff = curDiff;
+                   }
+                  }
+
+                  function pointerup_handler(ev) {
+                    // Remove this pointer from the cache and reset the target's
+                    // background and border
+                    remove_event(ev);
+
+                    // If the number of pointers down is less than two then reset diff tracker
+                    if (evCache.length < 2) prevDiff = -1;
+                  }
+
+                  function remove_event(ev) {
+                   // Remove this event from the target's cache
+                   for (var i = 0; i < evCache.length; i++) {
+                     if (evCache[i].pointerId == ev.pointerId) {
+                       evCache.splice(i, 1);
+                       break;
+                     }
+                   }
+                  }
+                }
             });
             $("#loading").remove();
         }
@@ -274,7 +417,7 @@ function readImage(file) {
 
     //check image exif metadate (mobile photos)
     //affects initial rotation
-    // preRotateImage(file);
+    preRotateImage(file);
 
     // Once a file is successfully readed:
     reader.addEventListener("load", function () {
@@ -339,7 +482,10 @@ function readImage(file) {
                 top: '',
                 left: '',
                 width: '',
+                transform: 'rotate(0deg)'
               });
+
+              currentRotate = 0;
             }
 
             // if image is wider than canvas, its width will be equal canvas width
@@ -364,9 +510,9 @@ function readImage(file) {
                 $(this).css('transform', 'rotate(' + portraitRotationDegree + 'deg)')
                 //switch height and width after rotated
                 //todo - do this in switch case degree
-                portraitwidth = $("#userPortrait").height();
-                //reset width / height
-                $("#userPortrait").width(portraitwidth);
+                // portraitwidth = $("#userPortrait").height();
+                // //reset width / height
+                // $("#userPortrait").width(portraitwidth);
             }
 
             $("#userPortrait").draggable({appendTo: "#croppingArea"})

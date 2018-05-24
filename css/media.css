@@ -410,13 +410,14 @@
   }
 
   .move {
-    margin-right: 30px;
+    margin-right: 5px;
     margin-bottom: 0;
   }
 
-  .zoom {
+  .zoom, .rotate {
     width: 60px;
     height: auto;
+    margin-bottom: 0;
   }
 
   .mobile-buttons {
