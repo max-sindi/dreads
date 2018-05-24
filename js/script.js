@@ -17,7 +17,7 @@ document.querySelectorAll('#goto-email-send').forEach(function(e){ e.addEventLis
 document.querySelectorAll('#goto-email-download').forEach(function(e){ e.addEventListener('click', function() {handleStepChange('email-download');} )});
 
 function handleStepChange(state){
-    for (let i=0; i<array.length; i++) {
+    for (var i=0; i<array.length; i++) {
         if (array[i]==state) document.getElementById(array[i]).style.display='block';
         else document.getElementById(array[i]).style.display='none';
     }
@@ -32,7 +32,7 @@ function directDownload() {
 
 var hidden = document.querySelectorAll('.hidden .element')
 if (!!hidden) {
-    for (let i=0, x=hidden.length; i<x; i++) {
+    for (var i=0, x=hidden.length; i<x; i++) {
         hidden[i].addEventListener('click', function() { hiddenStateChange(hidden[i]) });
         // document.querySelector('.step-two').style.marginTop = '-64px';
         // document.querySelector('.step-three').style.marginTop = '-64px';
@@ -105,6 +105,35 @@ result.setAttribute("crossOrigin", 'anonymous');
 //Main function
 $(function () {
 
+    detectSafari();
+
+    function detectSafari() {
+      var isSafari = !!navigator.userAgent.match(/Version\/[\d\.]+.*Safari/);
+
+      if(isSafari) {
+        popupSafariWarning();
+      }
+
+      function popupSafariWarning() {
+        var body = $('body')
+        var popup = $(`
+          <div class="safari-popup__wrap">
+            <div class="safari-popup">
+              We are sorry! The Dread-Your-Head App can work bad with Safari. Please download a real browser such as Chrome or Firefox.
+              <button class="safari-popup__button">OK</button>
+            </div>
+          </div>
+        `);
+
+        body.append(popup);
+        $('.safari-popup__button').click(closePopup);
+
+        function closePopup() {
+          popup.detach();
+        }
+      }
+
+    }
     //init DreadSelectionList
     initializeDreadSelectionList(dreadSelectionArray);
 
@@ -301,7 +330,7 @@ $(function () {
                 //enable functional buttons
                 $('.btn').removeClass("disabled");
 
-                // innit multitouch
+                // init multitouch
                 allowFaceResizing();
 
                 function allowFaceResizing() {
